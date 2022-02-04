@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="auth">
+   
+   <!--SELECT * FROM CLASS_DATA, CLASS_INFO WHERE CLASS_INFO.CLASS_NUM = CLASS_DATA.CLASS_NUM; -->
+   
+   <!-- <resultMap type="ClassDataDto" id="ClassDataDto">
+   	  <result column="CLASS_NUM" property="class_num" />
+   	  <result column="DATA_DATA" property="data_data" />
+   </resultMap>
+   
+   <resultMap type="ClassInfoDto" id="ClassInfoDto">
+      <result column="CLASS_NUM" property="class_num" />
+      <result column="CLASS_TITLE" property="class_title" />
+      <result column="CLASS_AUTHOR" property="class_author" />
+      <result column="CLASS_INTRO" property="class_intro" />
+      <result column="CLASS_STUDENTLEVEL" property="class_studentlevel" />
+      <result column="CLASS_CATEGORY" property="class_category" />
+      <collection property="classdataDto" resultMap="ClassDataDto">
+   </resultMap> -->
+   
+   <select id="classinfoselectlist" resultType="ClassInfoDto">
+      SELECT * FROM CLASS_INFO
+   </select>
+   
+   <select id="classinfoselectone" parameterType="map" resultType="ClassInfoDto">
+   	  SELECT * FROM CLASS_INFO WHERE CLASS_NUM = #{class_num}
+   </select>
+   
+   <select id="classdataselectone" parameterType="map" resultType="ClassDataDto">
+	  SELECT DATA_DATA FROM CLASS_DATA WHERE CLASS_NUM = #{class_num}
+   </select>
+   <!-- 
+   <insert id="classdatainsert" parameterType="ClassDataDto">
+      INSERT INTO CLASS_DATA VALUES(CLASS_DATA_SQ.NEXTVAL, #{data_subhead }, #{data_sq }, #{data_title }, #{data_data })
+   </insert>
+    -->
+    
+   <insert id="ClassInfoDtoInsert" parameterType="ClassInfoDto">
+      INSERT INTO CLASS_INFO VALUES(CLASS_INFO_SQ.NEXTVAL, #{class_title }, #{class_author }, #{class_intro }, #{class_rating }, #{class_price }, 0, #{class_studentlevel }, #{class_category })
+   </insert>
+
+
+<!-- 회원가입 및 체크 -->
+	
+	<insert id="insertUser" parameterType="map">
+		INSERT INTO USER_INFO
+		VALUES(USER_INFO_SQ.NEXTVAL, #{user_id}, #{user_pw}, #{user_nickname}, 'ROLE_USER', #{user_email}, 1)
+	</insert>
+	<select id="loginChk" parameterType="map" resultType="UserInfoDto">
+		SELECT * FROM USER_INFO WHERE USER_ID = #{id} AND USER_PW = #{pw}
+	</select>
+	
+	<select id="idChk" parameterType="String" resultType="com.outflearn.Outflearn.dto.memberRegisterDto">
+		SELECT * FROM USER_INFO WHERE USER_ID =#{userId}
+	</select>
+	
+	<select id="emailChk" parameterType="String" resultType="com.outflearn.Outflearn.dto.memberRegisterDto">
+		SELECT * FROM USER_INFO WHERE USER_EMAIL = #{user_email}
+	</select>
+	<select id="loginChkSns" parameterType="map" resultType="UserInfoDto">
+		SELECT * FROM USER_INFO WHERE USER_ID = #{id}
+	</select>
+	<!-- 아이디 찾기 -->
+	<select id="findId" parameterType="String" resultType="String">
+		SELECT USER_ID FROM USER_INFO WHERE USER_EMAIL = #{user_email}
+	</select>
+	<!-- 임시 비번 보내기 및 교체 -->
+	<update id="findPw" parameterType="map">
+		UPDATE USER_INFO SET USER_PW = #{newPw} WHERE USER_ID = #{user_id} AND USER_EMAIL=#{user_email} 
+	</update>	
+	<!-- 현재 비번 체크 -->
+	<select id="currentPwChk" parameterType="map" resultType="UserInfoDto">
+		SELECT USER_PW FROM USER_INFO WHERE USER_PW = #{user_pw}
+	</select>
+	<!-- 회원정보 변경 -->
+	<update id="updateUserInfo" parameterType="map">
+		UPDATE USER_INFO SET USER_NICKNAME=#{user_nickname}, USER_PW = #{user_pw}, USER_EMAIL = #{user_email} 
+		WHERE USER_ID = #{user_id}
+	</update>
+	
+	<select id="selectOne" parameterType="String" resultType="UserInfoDto">
+		SELECT * FROM USER_INFO WHERE USER_ID = #{user_id}
+	</select>
+	
+	<!-- 로그인 -->
+	
+	<select id="selectUser" resultType="java.util.Map">
+	SELECT
+		USER_ID as username,
+		USER_PW as password,
+		USER_ENABLED as enabled,
+		USER_AUTHORITY as authority,
+		USER_NUM, USER_NICKNAME, USER_EMAIL 
+	FROM USER_INFO
+	WHERE USER_ID=#{user_id}	
+	</select>
+	
+
+
+</mapper>

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="road">
+
+<insert id="roadmapInsert" parameterType="roadMapDto">
+INSERT INTO ROADMAP_INFO 
+VALUES(ROADMAP_SQ.NEXTVAL, #{user_num}, #{roadmap_title}, #{roadmap_content}, #{roadmap_subscribe}, #{roadmap_like}, #{roadmap_share}, #{main_num})
+</insert>
+
+<select id="selectSQ" resultType="int">
+SELECT ROADMAP_SQ.CURRVAL FROM DUAL
+</select>
+
+<insert id="roadNclass" parameterType="java.util.Map">
+<foreach collection="staffList" item="item" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL" index="i">
+INTO ROADMAP_CON
+VALUES (#{item},#{seq},#{i}+1)
+</foreach>
+</insert>
+
+<select id="mainStreamList" resultType="com.outflearn.Outflearn.dto.MainStreamDto">
+SELECT * FROM MAIN_STREAM
+</select>
+
+<select id="subStramList" resultType="com.outflearn.Outflearn.dto.SubStreamDto">
+SELECT * FROM SUB_STREAM 
+</select>
+
+
+<select id="classInfoList" resultType="ClassInfoDto" parameterType="map">
+SELECT * FROM CLASS_INFO	
+	<trim prefix="WHERE" prefixOverrides="AND|OR">
+		<foreach collection="itemList" item="item">
+			<if test="#{item} !=null">
+				OR CLASS_NUM IN (SELECT CLASS_NUM FROM CLASS_CATEGORY WHERE SUB_NUM=#{item})
+			</if>
+		</foreach>
+	</trim>	
+</select>
+
+<select id="roadMapList" resultType="RoadMapDto">
+SELECT * FROM ROADMAP_INFO
+</select>
+
+<select id="selectOneRoadMap" parameterType="String" resultType="RoadMapDto">
+SELECT * FROM ROADMAP_INFO WHERE ROADMAP_NUM=#{roadNum}
+</select>
+
+<select id="roadMapConlist" parameterType="String" resultType="java.lang.Integer">
+SELECT CLASS_NUM FROM ROADMAP_CON WHERE ROADMAP_NUM =#{roadNum} ORDER BY ROADMAP_CUE
+</select>
+
+<select id="RoadClassInfoList" resultType="ClassInfoDto" parameterType="map">
+SELECT * FROM CLASS_INFO WHERE CLASS_NUM IN
+	<foreach collection="roadClassList" item="item" open="(" separator="," close=")">
+		#{item}
+	</foreach>
+</select>
+
+
+<insert id="roadMapSubscribeInsert" parameterType="map" >
+INSERT INTO ROADMAP_SUBSCRIBE VALUES(#{userNum},#{roadNum})
+</insert>
+
+<update id="updateSubscribe" parameterType="String">
+UPDATE ROADMAP_INFO SET ROADMAP_SUBSCRIBE = ROADMAP_SUBSCRIBE+1 WHERE ROADMAP_NUM =#{roandNum}
+</update>
+
+<select id="roadJoinChk" parameterType="map" resultType="int">
+SELECT COUNT(*) FROM ROADMAP_SUBSCRIBE WHERE USER_NUM=#{userNum} AND ROADMAP_NUM=#{roadNum}
+</select>
+
+<delete id="roadMapSubscribeDelete" parameterType="map">
+DELETE FROM ROADMAP_SUBSCRIBE WHERE USER_NUM=#{userNum} AND ROADMAP_NUM=#{roadNum}
+</delete>
+
+<update id="deleteSubScribe" parameterType="String">
+UPDATE ROADMAP_INFO SET ROADMAP_SUBSCRIBE = ROADMAP_SUBSCRIBE-1 WHERE ROADMAP_NUM =#{roadNum}
+</update>
+
+<select id="roadComOne" resultType="com.outflearn.Outflearn.dto.RoadUserCombineDto">
+SELECT R.ROADMAP_NUM, R.USER_NUM, R.ROADMAP_TITLE, R.ROADMAP_CONTENT, R.ROADMAP_CONTENT, R.ROADMAP_SUBSCRIBE, R.ROADMAP_LIKE, R.ROADMAP_SHARE,
+	   R.MAIN_NUM, U.USER_NICKNAME
+	   FROM ROADMAP_INFO R, USER_INFO U
+	   WHERE R.USER_NUM = U.USER_NUM
+	   AND R.ROADMAP_NUM=#{roadNum}
+</select>
+
+
+
+<!--  페이징, 검색 -->
+<!-- 로드맵 -->
+<select id="selectTotalCountRoadMap" parameterType="map"
+		resultType="Integer">
+		SELECT count(*)
+		FROM ROADMAP_INFO R INNER JOIN  USER_INFO U ON R.USER_NUM = U.USER_NUM
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="main_num == 0">
+			<if test="txt_search != null">
+				<if test="searchOption == 'all'">
+				AND	upper(ROADMAP_TITLE) like '%' || upper(#{txt_search}) || '%'
+				OR upper(USER_NICKNAME) like '%' || upper(#{txt_search}) || '%'
+				AND	R.USER_NUM = U.USER_NUM
+				</if>
+				<if test="searchOption == 'roadmap_author'">
+					AND upper(USER_NICKNAME) like '%' || upper(#{txt_search}) || '%'
+					AND R.USER_NUM = U.USER_NUM
+				</if>
+				<if test="searchOption == 'roadmap_title'">
+					AND upper(ROADMAP_TITLE) like '%' || upper(#{txt_search}) || '%'
+					AND R.USER_NUM = U.USER_NUM
+				</if>
+			</if>
+			</if>
+			
+			<if test="main_num !=0">
+				AND MAIN_NUM = #{main_num }
+				<if test="txt_search != null">
+				<if test="searchOption == 'all'">
+				AND	upper(ROADMAP_TITLE) like '%' || upper(#{txt_search}) || '%'
+				OR upper(USER_NICKNAME) like '%' || upper(#{txt_search}) || '%'
+				AND	R.USER_NUM = U.USER_NUM
+				</if>
+				<if test="searchOption == 'roadmap_author'">
+					AND upper(USER_NICKNAME) like '%' || upper(#{txt_search}) || '%'
+					AND R.USER_NUM = U.USER_NUM
+				</if>
+				<if test="searchOption == 'roadmap_title'">
+					AND upper(ROADMAP_TITLE) like '%' || upper(#{txt_search}) || '%'
+					AND R.USER_NUM = U.USER_NUM
+				</if>
+			</if>
+			</if>
+		</trim>
+		
+	</select>
+	
+	
+<select id="SubBaList" parameterType="String" resultType="java.lang.Integer">
+
+SELECT * FROM 
+(SELECT CLASS_NUM FROM SUBSCRIBE WHERE USER_NUM = #{userNum})a FULL OUTER JOIN
+(SELECT CLASS_NUM FROM BASKET WHERE USER_NUM=#{userNum})b USING(CLASS_NUM)
+
+</select>	
+
+<insert id="AddToCart" parameterType="map">
+<foreach collection="cartArray" item="item" open="INSERT ALL" separator=" " close="SELECT*FROM DUAL" >
+INTO BASKET
+VALUES(#{userNum},#{item})
+</foreach>
+</insert>
+
+<select id="roadComList" parameterType="map"
+      resultType="com.outflearn.Outflearn.dto.RoadUserCombineDto">
+      SELECT ROADMAP_NUM,USER_NUM,ROADMAP_TITLE,ROADMAP_CONTENT,ROADMAP_SUBSCRIBE,ROADMAP_LIKE,ROADMAP_SHARE,MAIN_NUM,USER_NICKNAME
+      FROM (
+      SELECT ROWNUM AS RNUM, C.*
+         FROM ( 
+            SELECT R.ROADMAP_NUM AS ROADMAP_NUM,
+                R.USER_NUM AS USER_NUM,
+                 R.ROADMAP_TITLE AS ROADMAP_TITLE,
+                 R.ROADMAP_CONTENT AS ROADMAP_CONTENT,
+                 R.ROADMAP_SUBSCRIBE AS ROADMAP_SUBSCRIBE,
+                 R.ROADMAP_LIKE AS ROADMAP_LIKE,
+                 R.ROADMAP_SHARE AS ROADMAP_SHARE,
+                 R.MAIN_NUM AS MAIN_NUM,
+                 U.USER_NICKNAME AS USER_NICKNAME
+            FROM ROADMAP_INFO R INNER JOIN  USER_INFO U ON R.USER_NUM = U.USER_NUM
+            <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="main_num == 0">
+            	<if test="txt_search != null">
+            		<if test="searchOption=='all'">
+              		 AND upper(ROADMAP_TITLE) like '%' || upper(#{txt_search}) || '%' or
+             		 upper(USER_NICKNAME) like '%' || upper(#{txt_search}) || '%' and
+             	 	R.USER_NUM = U.USER_NUM
+            		</if>
+            		<if test="searchOption=='roadmap_author'">
+               		AND upper(USER_NICKNAME) like '%' || upper(#{txt_search}) || '%' and
+               		R.USER_NUM = U.USER_NUM
+            		</if>
+            		<if test="searchOption=='roadmap_title'">
+               		AND upper(ROADMAP_TITLE) like '%' || upper(#{txt_search}) || '%' and
+               		R.USER_NUM = U.USER_NUM
+            		</if>
+            	</if>
+            </if>
+            
+            <if test="main_num !=0">
+				AND MAIN_NUM = #{main_num }
+				<if test="txt_search != null">
+					<if test="searchOption == 'all'">
+					AND	upper(ROADMAP_TITLE) like '%' || upper(#{txt_search}) || '%'
+					OR upper(USER_NICKNAME) like '%' || upper(#{txt_search}) || '%'
+					AND	R.USER_NUM = U.USER_NUM
+					</if>
+					<if test="searchOption == 'roadmap_author'">
+					AND upper(USER_NICKNAME) like '%' || upper(#{txt_search}) || '%'
+					AND R.USER_NUM = U.USER_NUM
+					</if>
+					<if test="searchOption == 'roadmap_title'">
+					AND upper(ROADMAP_TITLE) like '%' || upper(#{txt_search}) || '%'
+					AND R.USER_NUM = U.USER_NUM
+				</if>
+			</if>
+			</if>
+			</trim>
+         ORDER BY R.ROADMAP_NUM DESC
+      ) C
+      )
+      WHERE RNUM BETWEEN #{firstIndex} + 1 AND #{firstIndex} + #{recordCountPerPage}
+   </select>
+   
+<update id="roadMapUpdate" parameterType="RoadMapDto" >
+UPDATE ROADMAP_INFO SET ROADMAP_TITLE =#{roadmap_title}, ROADMAP_CONTENT=#{roadmap_content}, MAIN_NUM=#{main_num} WHERE ROADMAP_NUM=#{roadmap_num}
+</update>
+
+<delete id="DeleteroadConBeforeUpdate" parameterType="String">
+DELETE ROADMAP_CON WHERE ROADMAP_NUM = #{roadNum}
+</delete>
+
+<insert id="addComment" parameterType="CommentDto">
+INSERT INTO ROADMAP_COMMENT
+VALUES(COMMENT_NUM_SQ.NEXTVAL,#{roadmap_num}, #{user_num}, #{comment_content}, COMMENT_GROUPNO_SQ.NEXTVAL,1,0)
+</insert>
+
+<select id="commentList" parameterType="String" resultType="CommentDto">
+SELECT R.COMMENT_NUM, R.ROADMAP_NUM, R.USER_NUM, R.COMMENT_CONTENT, R.COMMENT_GROUPNO, R.COMMENT_GROUPSQ, R.COMMENT_TITLETAB, U.USER_NICKNAME
+		FROM ROADMAP_COMMENT R, USER_INFO U
+		WHERE R.USER_NUM = U.USER_NUM
+		AND R.ROADMAP_NUM=#{roadNum}
+		ORDER BY R.COMMENT_GROUPNO DESC, R.COMMENT_GROUPSQ ASC
+</select>
+
+<update id="commentUpdate" parameterType="map">
+UPDATE ROADMAP_COMMENT SET COMMENT_CONTENT = #{content} WHERE COMMENT_NUM=#{ComNum}
+</update>
+
+<update id="deleteComment" parameterType="String">
+UPDATE ROADMAP_COMMENT SET COMMENT_CONTENT = '=====삭제 된 댓글입니다 =====' WHERE COMMENT_NUM=#{ComNum}
+</update>
+
+<update id="reCommentSqUpdate" parameterType="CommentDto">
+UPDATE ROADMAP_COMMENT SET COMMENT_GROUPSQ = COMMENT_GROUPSQ + 1
+WHERE COMMENT_GROUPNO = (SELECT COMMENT_GROUPNO FROM ROADMAP_COMMENT WHERE COMMENT_NUM = #{comment_num})
+AND COMMENT_GROUPSQ > (SELECT COMMENT_GROUPSQ FROM ROADMAP_COMMENT WHERE COMMENT_NUM= #{comment_num})
+</update>
+
+<insert id="reCommentAdd" parameterType="CommentDto">
+INSERT INTO ROADMAP_COMMENT
+VALUES (COMMENT_NUM_SQ.NEXTVAL, #{roadmap_num} , #{user_num}, #{comment_content} ,
+		(SELECT COMMENT_GROUPNO FROM ROADMAP_COMMENT WHERE COMMENT_NUM= #{comment_num}),
+		(SELECT COMMENT_GROUPSQ FROM ROADMAP_COMMENT WHERE COMMENT_NUM=#{comment_num})+1,
+		(SELECT COMMENT_TITLETAB FROM ROADMAP_COMMENT WHERE COMMENT_NUM=#{comment_num})+1 )
+
+</insert>
+
+<select id="getSubnumList" parameterType="map" resultType="java.lang.Integer">
+SELECT SUB_NUM FROM CLASS_CATEGORY WHERE CLASS_NUM IN
+<foreach collection="classlist" item="item" open="(" separator="," close=")">
+#{item}
+</foreach>
+
+</select>
+
+<select id="getsubnumNameList" parameterType="map" resultType="String">
+SELECT SUB_NAME FROM SUB_STREAM WHERE SUB_NUM IN
+<foreach collection="subnumNameList" item="item" open="(" separator="," close=")">
+#{item}
+</foreach>
+
+</select>
+
+
+
+</mapper>

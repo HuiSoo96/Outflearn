@@ -1,0 +1,62 @@
+ .btn-member{ 
+ 	background:#6372ff; 
+ 	color:#fff;
+ 		
+    padding: 6px 12px;
+    margin:5px;
+ 	display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    touch-action: manipulation;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+    
+/*     line-height: 1.42857143; */
+    text-align: center;
+/*     text-rendering: auto; */
+/*     letter-spacing: normal; */
+/*     word-spacing: normal; */
+/*     white-space: nowrap; */
+/*     vertical-align: middle; */
+/*     background-image: none; */
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-appearance: button;
+    text-transform: none;
+    overflow: visible;
+}
+
+ 
+ .btn-member:hover{ 
+ 	background-color:white;  
+ 	color:#6372ff; 
+ } 
+ 
+ .form-control{
+ 	color:#6372ff;
+ 	margin: 10px;
+ 	padding: 6px 12px;
+ 	
+ }
+ 
+ .memberlabel{
+ 	font-family: 'Raleway', sans-serif;
+ 	font-size:10em;
+ }
+.memlabel{
+	font-family: 'Raleway', sans-serif;
+	font-size:1em;
+	color:#6372ff;
+}
+.form-group{
+	text-align:center;
+	margin-left: auto;
+    margin-right: auto;
+}
+
+#findUserEmail{
+	width:40em;
+	
+}
+
+

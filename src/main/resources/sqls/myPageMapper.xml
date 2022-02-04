@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="myPage">
+	
+	<select id="getBasketClass" resultType="ClassInfoDto" parameterType="int">
+		SELECT * FROM CLASS_INFO WHERE CLASS_NUM IN(SELECT CLASS_NUM FROM BASKET WHERE USER_NUM = #{user_num})
+	</select>
+	
+	<select id="getSubscribe" resultType="ClassInfoDto" parameterType="int">
+		SELECT * FROM CLASS_INFO WHERE CLASS_NUM IN(SELECT CLASS_NUM FROM SUBSCRIBE WHERE USER_NUM = #{user_num})
+	</select>
+	
+	<select id="getSubRoadmap" resultType="RoadMapDto" parameterType="int">
+		SELECT * FROM ROADMAP_INFO WHERE ROADMAP_NUM IN(SELECT ROADMAP_NUM FROM ROADMAP_SUBSCRIBE WHERE USER_NUM = #{user_num})
+	</select>
+	
+	<select id="getQA" resultType="QADto" parameterType="int">
+		<![CDATA[ SELECT * FROM QA WHERE USER_NUM = #{user_num} ORDER BY QA_NUM DESC ]]>
+	</select>
+	
+	<select id="getPreBasketClass" resultType="ClassInfoDto" parameterType="int">
+		<![CDATA[ SELECT * FROM CLASS_INFO WHERE CLASS_NUM IN(SELECT CLASS_NUM FROM BASKET WHERE USER_NUM = #{user_num}) AND ROWNUM < 5 ]]>
+	</select>
+	
+	<select id="getPreSubscribe" resultType="ClassInfoDto" parameterType="int">
+		<![CDATA[ SELECT * FROM CLASS_INFO WHERE CLASS_NUM IN(SELECT CLASS_NUM FROM SUBSCRIBE WHERE USER_NUM = #{user_num}) AND ROWNUM < 5 ]]>
+	</select>
+	
+	<select id="getPreSubRoadmap" resultType="RoadMapDto" parameterType="int">
+		<![CDATA[ SELECT * FROM ROADMAP_INFO WHERE ROADMAP_NUM IN(SELECT ROADMAP_NUM FROM ROADMAP_SUBSCRIBE WHERE USER_NUM = #{user_num}) AND  ROWNUM < 5 ]]>
+	</select>
+	 
+	<select id="getPreQA" resultType="QADto" parameterType="int">
+		<![CDATA[ SELECT * FROM QA WHERE USER_NUM = #{user_num} AND ROWNUM < 6 ORDER BY QA_NUM DESC ]]>
+	</select>
+	
+	<select id="getReqLecturer" resultType="map" >
+		SELECT USER_NUM, REQ_NUM, REQ_PHONE, REQ_PR, REQ_CLASS, USER_ID, USER_NICKNAME, USER_EMAIL FROM REQ_LECTURER JOIN USER_INFO USING (USER_NUM)
+	</select>
+	
+	<select id="getUserList" resultType="map" >
+		SELECT USER_NUM, USER_ID, USER_NICKNAME, USER_AUTHORITY, USER_EMAIL, USER_ENABLED FROM USER_INFO
+	</select>
+	
+	<select id="getPreReqLecturer" resultType="map" >
+		<![CDATA[ SELECT USER_NUM, REQ_NUM, REQ_PHONE, REQ_PR, REQ_CLASS, USER_ID, USER_NICKNAME, USER_EMAIL FROM REQ_LECTURER JOIN USER_INFO USING (USER_NUM) WHERE ROWNUM < 6 ORDER BY REQ_NUM DESC ]]>
+	</select>
+	
+	<select id="getPreUserList" resultType="map" >
+		<![CDATA[ SELECT USER_NUM, USER_ID, USER_NICKNAME, USER_AUTHORITY, USER_EMAIL, USER_ENABLED FROM USER_INFO WHERE ROWNUM < 6 ORDER BY USER_NUM DESC ]]>
+	</select>
+	
+	<insert id="reqLecturer" parameterType="map">
+		INSERT INTO REQ_LECTURER VALUES(REQ_SQ.NEXTVAL, #{lecturerNum}, #{lecturerPhone}, #{lecturerIntro}, #{lecturerClass})
+	</insert>
+	
+	<update id="acceptReq">
+		UPDATE USER_INFO SET USER_AUTHORITY = 'ROLE_TUTOR' WHERE USER_NUM = #{user_num}
+	</update>
+	
+	<delete id="deniReq">
+		DELETE FROM REQ_LECTURER WHERE USER_NUM = #{user_num}
+	</delete>
+	
+	<update id="userEnabled" parameterType="String">
+		UPDATE USER_INFO SET USER_ENABLED = 1 WHERE USER_NUM = #{user_num}
+	</update>
+	
+	<update id="userDisabled" parameterType="String">
+		UPDATE USER_INFO SET USER_ENABLED = 0 WHERE USER_NUM = #{user_num}
+	</update>
+	
+	<insert id="setLiveSchedule" parameterType="map">
+		INSERT INTO LIVE VALUES(LIVE_SQ.NEXTVAL, #{setClass}, #{setTitle}, #{setAuthor}, #{setDate})
+	</insert>
+	
+	<select id="myClass" resultType="ClassInfoDto" parameterType="int">
+		SELECT * FROM CLASS_INFO WHERE USER_NUM = #{user_num}
+	</select>
+	
+	<select id="getPreMyClass" resultType="ClassInfoDto" parameterType="int">
+		<![CDATA[ SELECT * FROM CLASS_INFO WHERE USER_NUM = #{user_num} AND ROWNUM < 5 ORDER BY CLASS_NUM DESC ]]>
+	</select>
+	
+	<delete id="deleteClass" parameterType="String">
+		DELETE FROM CLASS_INFO WHERE CLASS_NUM = #{class_num}
+	</delete>
+	
+	<select id="myRoadmap" parameterType="int" resultType="RoadMapDto">
+		SELECT * FROM ROADMAP_INFO WHERE USER_NUM = #{user_num}
+	</select>
+	
+	<delete id="deleteRoadmap" parameterType="String">
+		DELETE FROM ROADMAP_INFO WHERE ROADMAP_NUM = #{roadmap_num}
+	</delete>
+	
+	<update id="updateNickname" parameterType="map">
+		UPDATE USER_INFO SET USER_NICKNAME = #{user_nickname} WHERE USER_NUM = #{user_num}
+	</update>
+	
+	<update id="updateEmail" parameterType="map">
+		UPDATE USER_INFO SET USER_EMAIL = #{user_email} WHERE USER_NUM = #{user_num}
+	</update>
+	
+	<select id="checkPw" parameterType="map" resultType="map">
+		SELECT * FROM USER_INFO WHERE USER_NUM = #{user_num}
+	</select>
+	
+	<update id="updatePw" parameterType="map">
+		UPDATE USER_INFO SET USER_PW = #{afterPw} WHERE USER_NUM = #{user_num}
+	</update>
+	
+</mapper>

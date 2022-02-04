@@ -1,0 +1,127 @@
+.nav .lg_category {
+   display: inline-block;
+}
+
+.nav > .all_category {
+   border-top: 1px solid #e4e4e4;
+}
+
+.nav > .lg_category > a {
+   border-bottom: 1px solid #e4e4e4;
+}
+
+.sm_category {
+   clear: both;
+}
+
+.nav > .lg_category > a {
+   padding-left: 0px;
+   padding-right: 30px;
+}
+
+aside li {
+   white-space: nowrap;
+}
+
+#side_category, #side_checkbox {
+    border: 1px solid #e4e4e4;
+}
+
+#side_checkbox {
+   margin-top: 2rem;
+}
+
+.page-header, #page-header-content {
+    margin-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    display: inline-block;
+    
+}
+
+.input-group {
+    margin: 1em 0;
+}
+
+.card {
+    margin: 1.2rem;
+    float: left;
+    border: 1px solid #e4e4e4;
+    padding: 0;
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+.card-body, .card img {
+     width: 100%;
+}
+
+.card img {
+   height: 17vw;
+}
+
+#side_checkbox > ul{
+   padding: 10px 15px;
+}
+
+#level, #charged {
+   margin-top: 10px;
+}
+
+div > select {
+   font-size: 0.4em;
+   padding: 0.3em;
+   border: 1px solid #dbdbdb;
+   border-radius: 4px;
+}
+
+input[type="checkbox"] {
+   position: absolute;
+   border: 0;
+   width: 1px;
+   height: 1px;
+   border: 0;
+}
+
+input[type="checkbox"] + label {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+input[type="checkbox"] + label:before {
+   content: ' ';
+   display: inline-block;
+   width: 15px;
+   height: 15px;
+   line-height: 15px;
+   text-align: center;
+   vertical-align: middle;
+   background: #fafafa;
+   margin: -2px 8px 0 0;
+   border: 1px solid #cacece;
+}
+
+input[type="checkbox"]:checked + label:before {
+  content: '\2714';
+  color: #99a1a7;
+  width: 15px;
+  top: 0;
+  left: 0;
+  text-shadow: 1px 1px #fff;
+  border-color: #adb8c0;
+}
+
+#paging{
+	position : relative;
+	left : 50%;
+	transform : translateX(-50%);
+}
+#search{
+	
+	display : inline-flex;
+	
+	)
+}

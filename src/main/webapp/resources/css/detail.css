@@ -1,0 +1,503 @@
+td h4 {
+   font-weight: normal;
+}
+
+div.row {
+   margin: 0;
+}
+
+input.btn, button.btn {
+   margin-right: 0.5rem;
+   float: right;
+}
+
+.note-editor {
+	margin-top: 20px;
+}
+
+.modal.in > div.modal-dialog {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.modal-content {
+	display: inline-block;
+}
+
+.modal-body .btn {
+	margin-bottom: 2rem;
+}
+
+.jumbotron .profile-border {
+   font-size: 1.6rem;
+   padding: 4px 0px;
+   border-bottom: 1px dashed #acacac;
+}
+
+.jumbotron > #jumbo_row > #study_btn h4 {
+   font-size: 2.5rem;
+   background-color: #ffffff;
+   color: #454545;
+   font-family: 'Nanum Gothic';
+}
+
+#jumbo_row {
+    padding-left: 4em;
+}
+
+.jumbotron, .jumbotron > #jumbo_row h3 {
+    background: #2c2e37;
+    color: #eeeeee;
+}
+
+.nav-tabs > li > a:hover {
+    background-color: #ffffff;
+    border-bottom-color: #6372ff;
+}
+
+.nav-tabs > li > a:focus {
+    background-color: #ffffff;
+    border-bottom-color: #6372ff;
+}
+
+
+.detail-nav-menu {
+    border-bottom: 2px solid #6473ff;
+}
+
+#jumbo_row > div {
+   height: 180px;
+}
+
+#study_btn {
+   display: table-cell;
+   vertical-align: middle;
+}
+
+#box {
+   padding: 3.5rem;
+   position: fixed;
+   right: 4.5rem;
+   max-width: 240px;
+   z-index: 999;
+   background-color: white;
+   border: 1px solid #acacac;
+}
+
+#box h2 {
+   background: white;
+   color: black;
+   font-family: 'Nanum Gothic';
+}
+
+.btns {
+   padding: 10px 2.5px;
+   font-size: 1.8rem;
+   width: 100%;
+   clear: both;
+   background: white;
+   border: solid 1px #acacac;
+   margin-bottom: 1rem;
+}
+
+.btns {
+   background: #6372ff;
+   color: #f2f3f7;
+}
+
+.fa-star, .fa-star-half-alt {
+   color: #ffff66;
+}
+
+.nav-page {
+   clear: both;
+   max-width: 1200px;
+}
+
+#Question {
+   padding-top: 3rem;
+   margin: 3rem;
+}
+
+#Question-btn {
+   background-color: #2fc97a;
+   border: 1px solid #2fc97a;
+}
+
+#question_content {
+   position: relative;
+   padding: 1rem;
+}
+
+.question_detail_link {
+   display: inline-block;
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   margin: auto;
+   z-index: 10;
+}
+
+.question_title {
+   font-weight: bold;
+}
+
+#QuestionForm {
+   position: fixed;
+   z-index: 9999;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+}
+
+.table-div {
+   padding: 3rem;
+}
+
+.icon::before {
+   content: '\f059';
+   font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+}
+
+#dashboard-list {
+   padding-left: 15px;
+   margin-top: 2rem;
+   margin-bottom: 2rem;
+}
+
+#dashboard-list > div:first-child {
+   margin: 0 1rem 0 0;
+}
+
+.QA-SelectOne{
+   cursor: pointer;
+}
+
+#review {
+   padding-top: 2rem;
+}
+
+.review-container {
+   max-width: 900px;
+}
+
+.student_question_panel {
+   clear: both;
+}
+
+.student_question_panel {
+	clear: both;
+}
+
+div.panel-set {
+   border: 1px solid #fffcca;
+   padding: 1rem;
+   margin-bottom: 1rem;
+}
+
+.review-btn-div {
+   display: inline-block;
+}
+
+#rating-tag, #count-tag{
+	color: #eeeeee;
+}
+
+.star-input>.input,
+.star-input>.input>label:hover,
+.star-input>.input>input:focus+label,
+.star-input>.input>input:checked+label {
+   display: inline-block;
+   vertical-align:middle;
+   background:url('http://localhost:8787/Outflearn/resources/img/RatingStar.png') no-repeat;
+}
+
+.star-input {
+   display:inline-block; 
+   white-space:nowrap;
+   width:225px;
+   height:40px;
+   padding:25px;
+   line-height:30px;
+}
+
+.star-input>.input {
+   display:inline-block;
+   width:150px;
+   background-size:150px;
+   height:28px;
+   white-space:nowrap;
+   overflow:hidden;
+   position: relative;
+}
+
+.star-input>.input>input {
+   position:absolute;
+   width:1px;
+   height:1px;
+   opacity:0;
+}
+
+.star-input>.input.focus {
+   outline:1px dotted #ddd;
+}
+
+.star-input>.input>label {
+   width:30px;
+   height:0;
+   padding:28px 0 0 0;
+   overflow: hidden;
+   float:left;
+   cursor: pointer;
+   position: absolute;
+   top: 0;
+   left: 0;
+}
+
+.star-input>.input>label:hover,
+.star-input>.input>input:focus+label,
+.star-input>.input>input:checked+label {
+   background-size: 150px;
+   background-position: 0 bottom;
+}
+
+.star-input>.input>label:hover~label {
+   background-image: none;
+}
+
+.star-input>.input,
+.star-input>.input>label:hover,
+.star-input>.input>input:focus+label,
+.star-input>.input>input:checked+label {
+   display: inline-block;
+   vertical-align:middle;
+   background:url('http://localhost:8787/Outflearn/resources/img/RatingStar.png') no-repeat;
+}
+
+.star-input {
+   display:inline-block; 
+   white-space:nowrap;
+   width:225px;
+   height:40px;
+   padding:25px;
+   line-height:30px;
+}
+
+.star-input>.input {
+   display:inline-block;
+   width:150px;
+   background-size:150px;
+   height:28px;
+   white-space:nowrap;
+   overflow:hidden;
+   position: relative;
+}
+
+.star-input>.input>input {
+   position:absolute;
+   width:1px;
+   height:1px;
+   opacity:0;
+}
+
+.star-input>.input.focus {
+   outline:1px dotted #ddd;
+}
+
+.star-input>.input>label {
+   width:30px;
+   height:0;
+   padding:28px 0 0 0;
+   overflow: hidden;
+   float:left;
+   cursor: pointer;
+   position: absolute;
+   top: 0;
+   left: 0;
+}
+
+.star-input>.input>label:hover,
+.star-input>.input>input:focus+label,
+.star-input>.input>input:checked+label {
+   background-size: 150px;
+   background-position: 0 bottom;
+}
+
+.star-input>.input>label:hover~label {
+   background-image: none;
+}
+
+.star-input>.input>label[for="p1"] {
+	width:30px; 
+	z-index:5;
+}
+
+.star-input>.input>label[for="p2"] {
+	width:60px; 
+	z-index:4;
+}
+
+.star-input>.input>label[for="p3"] {
+	width:90px;
+	z-index:3;
+}
+
+.star-input>.input>label[for="p4"] {
+	width:120px;
+	z-index:2;
+}
+
+.star-input>.input>label[for="p5"] {
+	width:150px;
+	z-index:1;
+}
+
+.star-input>output {
+	display:inline-block;
+	width:60px; 
+	font-size:18px;
+	text-align:right; 
+	vertical-align:middle;
+}
+
+.star-input-update>.input-update,
+.star-input-update>.input-update>label:hover,
+.star-input-update>.input-update>input:focus+label,
+.star-input-update>.input-update>input:checked+label {
+	display: inline-block;
+	vertical-align:middle;
+	background:url('http://localhost:8787/Outflearn/resources/img/RatingStar.png') no-repeat;
+}
+
+.star-input-update {
+	display:inline-block; 
+	white-space:nowrap;
+	width:225px;
+	height:40px;
+	padding:25px;
+	line-height:30px;
+}
+
+.star-input-update>.input-update {
+	display:inline-block;
+	width:150px;
+	background-size:150px;
+	height:28px;
+	white-space:nowrap;
+	overflow:hidden;
+	position: relative;
+}
+
+.star-input-update>.input-update>input {
+	position:absolute;
+	width:1px;
+	height:1px;
+	opacity:0;
+}
+
+.star-input-update>.input-update.focus {
+	outline:1px dotted #ddd;
+}
+
+.star-input-update>.input-update>label {
+	width:30px;
+	height:0;
+	padding:28px 0 0 0;
+	overflow: hidden;
+	float:left;
+	cursor: pointer;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.star-input-update>.input-update>label:hover,
+.star-input-update>.input-update>input:focus+label,
+.star-input-update>.input-update>input:checked+label {
+	background-size: 150px;
+	background-position: 0 bottom;
+}
+
+.star-input-update>.input-update>label:hover~label {
+	background-image: none;
+}
+
+.star-input-update>.input-update>label[for="u1"] {
+	width:30px; 
+	z-index:5;
+}
+
+.star-input-update>.input-update>label[for="u2"] {
+	width:60px; 
+	z-index:4;
+}
+
+.star-input-update>.input-update>label[for="u3"] {
+	width:90px;
+	z-index:3;
+}
+
+.star-input-update>.input-update>label[for="u4"] {
+	width:120px;
+	z-index:2;
+}
+
+.star-input-update>.input-update>label[for="u5"] {
+	width:150px;
+	z-index:1;
+}
+
+.star-input-update>output {
+	display:inline-block;
+	width:60px; 
+	font-size:18px;
+	text-align:right; 
+	vertical-align:middle;
+}
+
+@media (max-width: 1024px) {
+
+   #jumbo_row {
+      padding-right: 8.5rem;
+   }
+   
+   #instructor_profile {
+      font-size: 2.5rem;
+   }
+   
+    #box {
+       position: relative;
+       right: 0;
+       max-width: 1024px;
+    }
+    
+    #box, .jumbotron > #jumbo_row > #study_btn h4 {
+       border: none;
+       background: none;
+       color: white;
+    }
+    
+    #study_btn {
+       width: 1024px;
+    }
+    
+    #study_btn p {
+       text-align: center;
+    }
+}
+
+#id {
+   display: none;
+}
+
+#InsertAfter{
+	display: none;
+}

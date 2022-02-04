@@ -1,0 +1,59 @@
+
+/* body {overflow-y: hidden; overflow-x: hidden;} */
+
+.login-form{
+
+margin-top: -20%;
+
+
+}
+
+
+#login-logo{
+
+    font-family: 'Raleway', sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    color: #6372ff;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+#errorMSG{
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+#loginId, #loginPw{
+    font-size: 15px;
+    line-height: 16px;
+    position: relative;
+    z-index: 9;
+    width: 40%;
+    height: 50px;
+    padding: 7px 0 6px;
+    color: #000;
+    border: none;
+    background: #fff;
+    -webkit-appearance: none;
+    background-color: white;
+}
+
+ #submitBTN{ 
+ 	background:#6372ff; 
+ 	color:#fff;
+ 	border:none; 
+ 	position:relative; 
+	height:60px;
+ 	font-size:1.6em; 
+ 	padding:0 2em; 
+	cursor:pointer; 
+ 	transition:800ms ease all; 
+ 	outline:none; 
+ } 
+ 
+ #submitBTN:hover{ 
+ 	background:#fff; 
+ 	color:#6372ff; 
+ }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+
+<configuration>
+	
+	
+	<typeAliases>
+		<typeAlias type="com.outflearn.Outflearn.dto.UserInfoDto" alias="UserInfoDto"/>
+		<typeAlias type="com.outflearn.Outflearn.dto.ClassInfoDto" alias="ClassInfoDto"/>
+		<typeAlias type="com.outflearn.Outflearn.dto.ClassDataDto" alias="ClassDataDto"/>
+		<typeAlias type="com.outflearn.Outflearn.dto.ClassIntroduceDto" alias="ClassIntroduceDto"/>
+		<typeAlias type="com.outflearn.Outflearn.dto.LiveDto" alias="LiveDto"/>
+		<typeAlias type="com.outflearn.Outflearn.dto.connectUserClass" alias="connectUserClass"/>
+		<typeAlias type="com.outflearn.Outflearn.dto.ClassReviewDto" alias="ClassReviewDto"/>
+		<typeAlias type="com.outflearn.Outflearn.dto.RoadMapInfoDto" alias="RoadMapDto"/>
+		<typeAlias type="com.outflearn.Outflearn.dto.MainStreamDto" alias="MainStreamDto"/>
+		<typeAlias type="com.outflearn.Outflearn.dto.SubStreamDto" alias="subStreamDto"/>
+		<typeAlias type="com.outflearn.Outflearn.dto.ClassCategoryDto" alias="ClassCategoryDto"/>
+		<typeAlias type="com.outflearn.Outflearn.dto.QADto" alias="QADto" />
+		<typeAlias type="com.outflearn.Outflearn.dto.reqLecturer" alias="reqLecturer" />
+		<typeAlias type="com.outflearn.Outflearn.dto.CommentDto" alias="CommentDto" />
+	</typeAliases>
+	
+	
+
+	
+<!--  
+ 	resource : src/main/resources 
+	<mappers> 
+		 <mapper resource="/sqls/AuthMapper.xml"/>
+		 <mapper resource="/sqls/ClassDataMapper.xml"/>
+	</mappers>
+  applicationContext.xml에 설정해놔서 따로 mapper추가 안해도 됩니당~! -->
+
+
+
+</configuration>

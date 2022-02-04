@@ -1,0 +1,158 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        video {
+            max-width: 100%;
+            width: 100%
+       }
+
+        body {
+            font: 13px Helvetica, Arial;
+        }
+
+        form input {
+            background-color : #fff;
+            padding: 10px;
+            width: 100%;
+            height: 100%;
+        }
+
+        #content{
+            display: block;
+        }
+
+        #videos{
+            background-color: azure;
+            float: left;
+            width: 78%
+        }
+        
+        #chatArea{
+        	float: right;
+            min-width: 22%;
+            height: 100vh;
+            border: 1px solid #e4e4e4;
+        }
+
+        #chat{
+            overflow-y: scroll;
+            overflow-x: hidden;
+            background-color: #9bbbd4;
+            color: #000000;
+            height: 95%;
+        }
+
+        .div-button-send{
+            height: 5%;
+        }
+        
+        #typing{
+            height: 100%;
+        }
+
+        #info{
+            padding: 7px;
+            width: 78%;
+            display: inline-block;
+            font-size: 15px;
+        }
+
+        #roomTitle{
+            display: inline-block;
+            border-bottom: 1px solid #e4e4e4;
+            margin-bottom: 5px;
+        }
+        
+        #classThumb{
+            width: 125px;
+        	height: 125px;
+            border-radius: 50%;
+            margin: 10px;
+            float: left;
+        }
+        
+        #casterName{
+        	color: #4279ff;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        #classIntro{
+		  overflow: hidden;
+		  text-overflow: ellipsis;
+		  white-space: nowrap;
+        }
+
+        #messages {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        #messages li {
+            padding: 5px 10px;
+            background: rgb(255, 229, 52);
+            border-radius: 0.4em;
+            font-size: 15px;
+            display: block;
+            max-width: 350px;
+            margin: 5px;
+            clear: both;
+            word-break: break-all;
+        }
+
+        #messages p.nameSpace{
+            display: inline-block;
+            color: #999999;
+        }
+
+        #messages li.other{
+        	background: white;
+            float: left;
+        }
+
+        #messages li.me{
+            
+            float: right;
+        }
+        
+        #messages li p{
+			margin: 0;
+        }
+
+        #messages li.server{
+            text-align: center;
+            max-width: 100%;
+            background: green;
+        }
+        
+        #thisClassInfo{
+        	margin-bottom: 10px;
+        	border-bottom: 1px solid #e4e4e4;
+        }
+        
+        #otherClassInfo{
+        	padding: 15px;
+        }
+
+        .card-img{
+            width: 100%;
+        }
+
+        @media ( max-width :1080px){
+            #videos{
+                width: 100%;
+            }
+            #info{
+                width: 60%;
+            }
+            #chat{
+                width: 100%;
+            }
+            #typing{
+                width: 100%;
+            } 
+
+        }
